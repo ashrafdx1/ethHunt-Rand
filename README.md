@@ -16,5 +16,5 @@ a- provide Ethereum addreases list and name it 'eth_address.txt' in same directo
 
 b- run script!.
 
-c- modify the cores to increase or decrease speed and power usagge.
+c- modify the cores to increase or decrease speed and power usage.
 

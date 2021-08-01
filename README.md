@@ -10,9 +10,6 @@ Iceland script with modifications
 
     pip install web3
 
-1- using os.urandom(32) to random generating all keys
-
-2- saving anything found to a txt file
 
 * future work: check balance of found addresses
 # How to use:

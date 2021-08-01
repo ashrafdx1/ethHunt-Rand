@@ -1,6 +1,7 @@
 # ethHunt-Rand
 Iceland script with modifications
 
+
 1- using os.urandom(32) to random generating all keys
 
 2- saving anything found to a txt file
@@ -10,8 +11,6 @@ Iceland script with modifications
 
     pip install web3
 
-
-* future work: check balance of found addresses
 # How to use:
 a- provide Ethereum addreases list and name it 'eth_address.txt' in same directory.
 

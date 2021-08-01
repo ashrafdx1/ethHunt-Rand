@@ -96,4 +96,4 @@ def generate_key_address_pairs(counter, match, queue, r):  # pragma: no cover
 
 if __name__ == '__main__':
     print('[+] Starting.........Wait.....')
-    hunt_ETH_address(cores=1)
+    hunt_ETH_address(cores=2)

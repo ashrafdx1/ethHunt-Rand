@@ -12,8 +12,14 @@ from web3 import Web3
 #**************************************************************
 from multiprocessing import Manager, Event, Process, Queue, Value, cpu_count
 #==============================================================================
-eth_address_list = [line.split(',')[0] for line in open("eth_address.txt",'r')]
-eth_address_list = set(eth_address_list)
+#eth_address_list = [line.split(',')[0] for line in open("eth_address_lower2021-Aug-01__07_17_30.txt",'r')]
+#eth_address_list = set(eth_address_list)
+with open('eth_address.txt') as f:
+    eth_address_list_u = f.readlines()
+eth_address_list = eth_address_list_u
+for i in range(len(eth_address_list_u)):
+    eth_address_list[i] = eth_address_list_u[i].lower()
+#print(eth_address_list)
 screen_print_after_keys = 100000
 #==============================================================================
 prefix = '0x'
@@ -66,6 +72,7 @@ def hunt_ETH_address(cores='all'):  # pragma: no cover
     private_key, address = queue.get()
     print(f'\n\n********************Address found:  {address}')
     print(f'********************Private Key:  {private_key}')
+    l = input('saved to file, press anything to exit')
 
 #==============================================================================
 def generate_key_address_pairs(counter, match, queue, r):  # pragma: no cover
@@ -87,18 +94,19 @@ def generate_key_address_pairs(counter, match, queue, r):  # pragma: no cover
         privateKey = privateKey.hex()
         #eth_addr = getAddr(prefix,privateKey)
         acct = web3.eth.Account.privateKeyToAccount(privateKey)
-        eth_addr = acct.address
+        eth_addr = acct.address.lower()
 
         if (k+1)%screen_print_after_keys == 0: 
             print('[+] Total Keys Checked : {0}  [ Speed : {1:.2f} Keys/s ]  Current ETH: {2}'.format(counter.value, counter.value/(time.time() - st), eth_addr))
-        if eth_addr in eth_address_list:
-            match.set()
-            queue.put_nowait((privateKey, eth_addr))
-            with open(f'ETH_found_{prefix}.txt','a') as fw:
-                fw.write(eth_addr + '\n')
-                fw.write(privateKey)
-            return
-        
+        for i in eth_address_list:
+            if eth_addr[:32] == i[:32]:
+                match.set()
+                queue.put_nowait((privateKey, eth_addr))
+                with open(f'ETH_found_{eth_addr}.txt','a') as fw:
+                    fw.write(eth_addr + '\n')
+                    fw.write(privateKey)
+                return
+            
         k += 1
 
 #==============================================================================

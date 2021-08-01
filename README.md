@@ -5,9 +5,18 @@ Iceland script with modifications
 
 2- saving anything found to a txt file
 
+# Requirements 
+* web3 module has to be installed before running the script
+
+    pip install web3
+
+1- using os.urandom(32) to random generating all keys
+
+2- saving anything found to a txt file
+
 * future work: check balance of found addresses
 # How to use:
-a- provide eth list and name it 'eth_address.txt' in same directory.
+a- provide Ethereum addreases list and name it 'eth_address.txt' in same directory.
 
 b- run script!.
 
